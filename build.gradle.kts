@@ -1,10 +1,12 @@
 plugins {
+    java
     id("org.jetbrains.kotlin.jvm") version "1.6.21"
     id("org.jetbrains.kotlin.kapt") version "1.6.21"
     id("org.jetbrains.kotlin.plugin.allopen") version "1.6.21"
     id("com.github.johnrengelman.shadow") version "7.1.2"
     id("io.micronaut.application") version "3.7.4"
     id("io.micronaut.test-resources") version "3.7.4"
+    id( "com.github.davidmc24.gradle.plugin.avro") version "1.6.0"
 }
 
 version = "0.1"
@@ -26,7 +28,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
     runtimeOnly("ch.qos.logback:logback-classic")
     implementation("io.micronaut:micronaut-validation")
-
+    implementation("org.apache.avro:avro:1.11.0")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 
 }
@@ -64,5 +66,7 @@ micronaut {
     }
 }
 
-
-
+val generateAvro = tasks.register<com.github.davidmc24.gradle.plugin.avro.GenerateAvroJavaTask>("generateAvro") {
+    source("src/main/resources/avro")
+    this.setOutputDir(file("src/main/avro"))
+}
