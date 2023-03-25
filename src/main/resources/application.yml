@@ -15,9 +15,11 @@ kafka:
   bootstrap:
     servers:
       - localhost:29092
-  key:
-    serializer: org.apache.kafka.common.serialization.UUIDSerializer
-    deserializer: org.apache.kafka.common.serialization.UUIDDeserializer
-  value:
-    serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
-    deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
+  consumers:
+    default:
+      key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+  producers:
+    default:
+      key.serializer: org.apache.kafka.common.serialization.StringSerializer
+      value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
