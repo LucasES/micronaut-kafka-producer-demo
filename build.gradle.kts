@@ -12,9 +12,15 @@ plugins {
 version = "0.1"
 group = "com.example"
 
-val kotlinVersion=project.properties.get("kotlinVersion")
+val kotlinVersion= project.properties["kotlinVersion"]
+val confluentVersion= project.properties["confluentVersion"]
 repositories {
     mavenCentral()
+    maven {
+        url = uri("https://jitpack.io/")
+        url = uri("https://jcenter.bintray.com")
+        url = uri("https://packages.confluent.io/maven/")
+    }
 }
 
 dependencies {
@@ -28,7 +34,14 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
     runtimeOnly("ch.qos.logback:logback-classic")
     implementation("io.micronaut:micronaut-validation")
+
     implementation("org.apache.avro:avro:1.11.0")
+
+    // Confluent
+    implementation("io.confluent:kafka-schema-registry-client:6.1.0")
+    implementation("io.confluent:kafka-streams-avro-serde:6.1.0")
+    implementation("io.confluent:kafka-avro-serializer:5.2.1")
+
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 
 }
