@@ -17,7 +17,7 @@ public class Hero extends org.apache.avro.specific.SpecificRecordBase implements
   private static final long serialVersionUID = -6404128808472578632L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Hero\",\"namespace\":\"com.lucases\",\"fields\":[{\"name\":\"name\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Hero\",\"namespace\":\"com.lucases\",\"fields\":[{\"name\":\"name\",\"type\":[\"null\",\"string\"],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -73,7 +73,7 @@ public class Hero extends org.apache.avro.specific.SpecificRecordBase implements
     return DECODER.decode(b);
   }
 
-  private java.lang.String name;
+  private java.lang.CharSequence name;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -86,7 +86,7 @@ public class Hero extends org.apache.avro.specific.SpecificRecordBase implements
    * All-args constructor.
    * @param name The new value for name
    */
-  public Hero(java.lang.String name) {
+  public Hero(java.lang.CharSequence name) {
     this.name = name;
   }
 
@@ -110,7 +110,7 @@ public class Hero extends org.apache.avro.specific.SpecificRecordBase implements
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: name = value$ != null ? value$.toString() : null; break;
+    case 0: name = (java.lang.CharSequence)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -119,7 +119,7 @@ public class Hero extends org.apache.avro.specific.SpecificRecordBase implements
    * Gets the value of the 'name' field.
    * @return The value of the 'name' field.
    */
-  public java.lang.String getName() {
+  public java.lang.CharSequence getName() {
     return name;
   }
 
@@ -128,7 +128,7 @@ public class Hero extends org.apache.avro.specific.SpecificRecordBase implements
    * Sets the value of the 'name' field.
    * @param value the value to set.
    */
-  public void setName(java.lang.String value) {
+  public void setName(java.lang.CharSequence value) {
     this.name = value;
   }
 
@@ -173,7 +173,7 @@ public class Hero extends org.apache.avro.specific.SpecificRecordBase implements
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<Hero>
     implements org.apache.avro.data.RecordBuilder<Hero> {
 
-    private java.lang.String name;
+    private java.lang.CharSequence name;
 
     /** Creates a new Builder */
     private Builder() {
@@ -208,7 +208,7 @@ public class Hero extends org.apache.avro.specific.SpecificRecordBase implements
       * Gets the value of the 'name' field.
       * @return The value.
       */
-    public java.lang.String getName() {
+    public java.lang.CharSequence getName() {
       return name;
     }
 
@@ -218,7 +218,7 @@ public class Hero extends org.apache.avro.specific.SpecificRecordBase implements
       * @param value The value of 'name'.
       * @return This builder.
       */
-    public com.lucases.Hero.Builder setName(java.lang.String value) {
+    public com.lucases.Hero.Builder setName(java.lang.CharSequence value) {
       validate(fields()[0], value);
       this.name = value;
       fieldSetFlags()[0] = true;
@@ -249,7 +249,7 @@ public class Hero extends org.apache.avro.specific.SpecificRecordBase implements
     public Hero build() {
       try {
         Hero record = new Hero();
-        record.name = fieldSetFlags()[0] ? this.name : (java.lang.String) defaultValue(fields()[0]);
+        record.name = fieldSetFlags()[0] ? this.name : (java.lang.CharSequence) defaultValue(fields()[0]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -301,7 +301,7 @@ public class Hero extends org.apache.avro.specific.SpecificRecordBase implements
         in.readNull();
         this.name = null;
       } else {
-        this.name = in.readString();
+        this.name = in.readString(this.name instanceof Utf8 ? (Utf8)this.name : null);
       }
 
     } else {
@@ -312,7 +312,7 @@ public class Hero extends org.apache.avro.specific.SpecificRecordBase implements
             in.readNull();
             this.name = null;
           } else {
-            this.name = in.readString();
+            this.name = in.readString(this.name instanceof Utf8 ? (Utf8)this.name : null);
           }
           break;
 

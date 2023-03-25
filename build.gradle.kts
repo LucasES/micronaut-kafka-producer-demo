@@ -68,5 +68,11 @@ micronaut {
 
 val generateAvro = tasks.register<com.github.davidmc24.gradle.plugin.avro.GenerateAvroJavaTask>("generateAvro") {
     source("src/main/resources/avro")
-    this.setOutputDir(file("src/main/avro"))
+    this.setOutputDir(file("src/main/java"))
+}
+
+avro {
+    stringType.set("CharSequence")
+    fieldVisibility.set("private")
+    customConversion(org.apache.avro.Conversions.UUIDConversion::class.java)
 }

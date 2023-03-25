@@ -1,7 +1,30 @@
 micronaut:
   application:
-    name: micronautKafkaProducerDemo
-netty:
-  default:
-    allocator:
-      max-order: 3
+    name: micronaut-kafka-producer-demo
+  server:
+    port: 9090
+
+endpoints:
+  health:
+    sensitive: false
+
+kafka:
+  schema:
+    registry:
+      url: http://localhost:8081
+  bootstrap:
+    servers:
+      - localhost:9092
+  producers:
+    producer-avro:
+      key:
+        serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+      value:
+        serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+  consumers:
+    example-group-avro:
+      specific.avro.reader: true
+      key:
+        deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      value:
+        deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
