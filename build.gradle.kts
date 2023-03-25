@@ -13,7 +13,6 @@ version = "0.1"
 group = "com.example"
 
 val kotlinVersion= project.properties["kotlinVersion"]
-val confluentVersion= project.properties["confluentVersion"]
 repositories {
     mavenCentral()
     maven {
@@ -82,6 +81,10 @@ micronaut {
 val generateAvro = tasks.register<com.github.davidmc24.gradle.plugin.avro.GenerateAvroJavaTask>("generateAvro") {
     source("src/main/resources/avro")
     this.setOutputDir(file("src/main/java"))
+}
+
+tasks.withType<JavaCompile> {
+    dependsOn("generateAvro")
 }
 
 avro {
