@@ -1,0 +1,15 @@
+{
+    "type": "record",
+    "name": "Hero",
+    "namespace": "com.lucases",
+    "fields": [
+        {
+            "name": "name",
+            "type": "string"
+        },
+        {
+            "name": "power",
+            "type": "double"
+        }
+    ]
+}

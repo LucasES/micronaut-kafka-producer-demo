@@ -1,7 +1,30 @@
 micronaut:
   application:
-    name: micronautKafkaProducerDemo
-netty:
+    name: micronaut-kafka-producer-demo
+  server:
+    port: 9090
+
+endpoints:
+  health:
+    sensitive: false
+
+kafka:
+  schema:
+    registry:
+      url: http://localhost:8081
+  bootstrap:
+    servers:
+      - localhost:29092
+  producers:
+    default:
+      key.serializer: org.apache.kafka.common.serialization.UUIDSerializer
+      value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+
+datasources:
   default:
-    allocator:
-      max-order: 3
+    url: jdbc:postgresql://localhost:5432/herodb
+    driverClassName: org.postgresql.Driver
+    username: user
+    password: pass
+    schema-generate: CREATE_DROP
+    dialect: POSTGRES
