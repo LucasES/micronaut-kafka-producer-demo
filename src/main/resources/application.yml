@@ -19,3 +19,12 @@ kafka:
     default:
       key.serializer: org.apache.kafka.common.serialization.UUIDSerializer
       value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+
+datasources:
+  default:
+    url: jdbc:postgresql://localhost:5432/herodb
+    driverClassName: org.postgresql.Driver
+    username: user
+    password: pass
+    schema-generate: CREATE_DROP
+    dialect: POSTGRES

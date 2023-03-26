@@ -74,7 +74,7 @@ services:
     build:
       context: .
       dockerfile: postgres.dockerfile
-    image: "postgres-tutorials"
+    image: "postgres-herodb"
     container_name: ${PG_CONTAINER_NAME}
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
@@ -82,11 +82,11 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       PGDATA: ${PGDATA}
     volumes:
-      - hero:/data/postgres-hero
+      - herodb:/data/postgres-herodb
     ports:
       - "5432:5432"
     restart: unless-stopped
 
 volumes:
-  hero:
+  herodb:
     external: true

@@ -24,18 +24,22 @@ repositories {
 }
 
 dependencies {
+    kapt("io.micronaut.data:micronaut-data-processor")
     kapt("io.micronaut:micronaut-http-validation")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-jackson-databind")
     implementation("io.micronaut.kafka:micronaut-kafka")
+    implementation("io.micronaut.data:micronaut-data-jdbc")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
+    implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     implementation("jakarta.annotation:jakarta.annotation-api")
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
-    runtimeOnly("ch.qos.logback:logback-classic")
+
     implementation("io.micronaut:micronaut-validation")
 
     implementation("org.apache.avro:avro:1.11.0")
+    compileOnly("jakarta.persistence:jakarta.persistence-api:3.1.0")
 
     // Confluent
     implementation("io.confluent:kafka-schema-registry-client:${confluenticVersion}")
@@ -43,7 +47,8 @@ dependencies {
     implementation("io.confluent:kafka-avro-serializer:${confluenticVersion}")
 
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
-
+    runtimeOnly("org.postgresql:postgresql")
+    runtimeOnly("ch.qos.logback:logback-classic")
 }
 
 
