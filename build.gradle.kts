@@ -13,6 +13,7 @@ version = "0.1"
 group = "com.example"
 
 val kotlinVersion= project.properties["kotlinVersion"]
+val confluenticVersion= project.properties["confluenticVersion"]
 repositories {
     mavenCentral()
     maven {
@@ -37,9 +38,9 @@ dependencies {
     implementation("org.apache.avro:avro:1.11.0")
 
     // Confluent
-    implementation("io.confluent:kafka-schema-registry-client:6.1.0")
-    implementation("io.confluent:kafka-streams-avro-serde:6.1.0")
-    implementation("io.confluent:kafka-avro-serializer:5.2.1")
+    implementation("io.confluent:kafka-schema-registry-client:${confluenticVersion}")
+    implementation("io.confluent:kafka-streams-avro-serde:${confluenticVersion}")
+    implementation("io.confluent:kafka-avro-serializer:${confluenticVersion}")
 
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 

@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class Hero extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -6404128808472578632L;
+  private static final long serialVersionUID = -3272818893059988373L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Hero\",\"namespace\":\"com.lucases\",\"fields\":[{\"name\":\"name\",\"type\":[\"null\",\"string\"],\"default\":null}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Hero\",\"namespace\":\"com.lucases\",\"fields\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"power\",\"type\":\"double\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -74,6 +74,7 @@ public class Hero extends org.apache.avro.specific.SpecificRecordBase implements
   }
 
   private java.lang.CharSequence name;
+  private double power;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -85,9 +86,11 @@ public class Hero extends org.apache.avro.specific.SpecificRecordBase implements
   /**
    * All-args constructor.
    * @param name The new value for name
+   * @param power The new value for power
    */
-  public Hero(java.lang.CharSequence name) {
+  public Hero(java.lang.CharSequence name, java.lang.Double power) {
     this.name = name;
+    this.power = power;
   }
 
   @Override
@@ -101,6 +104,7 @@ public class Hero extends org.apache.avro.specific.SpecificRecordBase implements
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return name;
+    case 1: return power;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -111,6 +115,7 @@ public class Hero extends org.apache.avro.specific.SpecificRecordBase implements
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: name = (java.lang.CharSequence)value$; break;
+    case 1: power = (java.lang.Double)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -130,6 +135,23 @@ public class Hero extends org.apache.avro.specific.SpecificRecordBase implements
    */
   public void setName(java.lang.CharSequence value) {
     this.name = value;
+  }
+
+  /**
+   * Gets the value of the 'power' field.
+   * @return The value of the 'power' field.
+   */
+  public double getPower() {
+    return power;
+  }
+
+
+  /**
+   * Sets the value of the 'power' field.
+   * @param value the value to set.
+   */
+  public void setPower(double value) {
+    this.power = value;
   }
 
   /**
@@ -174,6 +196,7 @@ public class Hero extends org.apache.avro.specific.SpecificRecordBase implements
     implements org.apache.avro.data.RecordBuilder<Hero> {
 
     private java.lang.CharSequence name;
+    private double power;
 
     /** Creates a new Builder */
     private Builder() {
@@ -190,6 +213,10 @@ public class Hero extends org.apache.avro.specific.SpecificRecordBase implements
         this.name = data().deepCopy(fields()[0].schema(), other.name);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
+      if (isValidValue(fields()[1], other.power)) {
+        this.power = data().deepCopy(fields()[1].schema(), other.power);
+        fieldSetFlags()[1] = other.fieldSetFlags()[1];
+      }
     }
 
     /**
@@ -201,6 +228,10 @@ public class Hero extends org.apache.avro.specific.SpecificRecordBase implements
       if (isValidValue(fields()[0], other.name)) {
         this.name = data().deepCopy(fields()[0].schema(), other.name);
         fieldSetFlags()[0] = true;
+      }
+      if (isValidValue(fields()[1], other.power)) {
+        this.power = data().deepCopy(fields()[1].schema(), other.power);
+        fieldSetFlags()[1] = true;
       }
     }
 
@@ -244,12 +275,52 @@ public class Hero extends org.apache.avro.specific.SpecificRecordBase implements
       return this;
     }
 
+    /**
+      * Gets the value of the 'power' field.
+      * @return The value.
+      */
+    public double getPower() {
+      return power;
+    }
+
+
+    /**
+      * Sets the value of the 'power' field.
+      * @param value The value of 'power'.
+      * @return This builder.
+      */
+    public com.lucases.Hero.Builder setPower(double value) {
+      validate(fields()[1], value);
+      this.power = value;
+      fieldSetFlags()[1] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'power' field has been set.
+      * @return True if the 'power' field has been set, false otherwise.
+      */
+    public boolean hasPower() {
+      return fieldSetFlags()[1];
+    }
+
+
+    /**
+      * Clears the value of the 'power' field.
+      * @return This builder.
+      */
+    public com.lucases.Hero.Builder clearPower() {
+      fieldSetFlags()[1] = false;
+      return this;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public Hero build() {
       try {
         Hero record = new Hero();
         record.name = fieldSetFlags()[0] ? this.name : (java.lang.CharSequence) defaultValue(fields()[0]);
+        record.power = fieldSetFlags()[1] ? this.power : (java.lang.Double) defaultValue(fields()[1]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -282,13 +353,9 @@ public class Hero extends org.apache.avro.specific.SpecificRecordBase implements
   @Override public void customEncode(org.apache.avro.io.Encoder out)
     throws java.io.IOException
   {
-    if (this.name == null) {
-      out.writeIndex(0);
-      out.writeNull();
-    } else {
-      out.writeIndex(1);
-      out.writeString(this.name);
-    }
+    out.writeString(this.name);
+
+    out.writeDouble(this.power);
 
   }
 
@@ -297,23 +364,19 @@ public class Hero extends org.apache.avro.specific.SpecificRecordBase implements
   {
     org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
     if (fieldOrder == null) {
-      if (in.readIndex() != 1) {
-        in.readNull();
-        this.name = null;
-      } else {
-        this.name = in.readString(this.name instanceof Utf8 ? (Utf8)this.name : null);
-      }
+      this.name = in.readString(this.name instanceof Utf8 ? (Utf8)this.name : null);
+
+      this.power = in.readDouble();
 
     } else {
-      for (int i = 0; i < 1; i++) {
+      for (int i = 0; i < 2; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
-          if (in.readIndex() != 1) {
-            in.readNull();
-            this.name = null;
-          } else {
-            this.name = in.readString(this.name instanceof Utf8 ? (Utf8)this.name : null);
-          }
+          this.name = in.readString(this.name instanceof Utf8 ? (Utf8)this.name : null);
+          break;
+
+        case 1:
+          this.power = in.readDouble();
           break;
 
         default:
